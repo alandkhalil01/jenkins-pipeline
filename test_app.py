@@ -4,14 +4,12 @@ from app import app
 
 @pytest.fixture
 def client():
-    """Create a test client for the Flask app."""
     app.config['TESTING'] = True
     with app.test_client() as client:
         yield client
 
 
 def test_home(client):
-    """Test the home endpoint returns correct response."""
     response = client.get('/')
     assert response.status_code == 200
     data = response.get_json()
@@ -21,7 +19,6 @@ def test_home(client):
 
 
 def test_health(client):
-    """Test the health endpoint returns healthy status."""
     response = client.get('/health')
     assert response.status_code == 200
     data = response.get_json()
@@ -29,7 +26,6 @@ def test_health(client):
 
 
 def test_info(client):
-    """Test the info endpoint returns app information."""
     response = client.get('/info')
     assert response.status_code == 200
     data = response.get_json()
